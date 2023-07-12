@@ -1,0 +1,34 @@
+[package]
+name = "code"
+version = "0.1.0"
+edition = "2021"
+
+[workspace]
+members = [
+  "stack"
+]
+
+[dependencies]
+midly = { version = "0.5.2", default-features = false }
+panic-halt = "0.2.0"
+embedded-hal = "0.2.3"
+nb = "1.0.0"
+void = { version = "1.0.2", default-features = false }
+libm = "0.2.5"
+stack = { path = "stack" }
+
+[dependencies.arduino-hal]
+git = "https://github.com/rahix/avr-hal"
+rev = "1aacefb335517f85d0de858231e11055d9768cdf"
+features = ["arduino-uno"]
+
+[profile.dev]
+panic = "abort"
+lto = true
+opt-level = "s"
+
+[profile.release]
+panic = "abort"
+codegen-units = 1
+lto = true
+opt-level = "s"
